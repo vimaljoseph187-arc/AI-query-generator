@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,99 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Background */
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Container */
+.container {
+  background: #ffffff;
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Title */
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+textarea:focus {
+  border: 1px solid #667eea;
+}
+
+/* Button */
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #667eea;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #5a67d8;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Result Box */
+.result {
+  margin-top: 25px;
+  text-align: left;
+}
+
+.result h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* Code Display */
+pre {
+  background: #1e1e1e;
+  color: #00ff99;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 13px;
 }
