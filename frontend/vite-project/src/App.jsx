@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import API from "./config";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -12,7 +13,7 @@ function App() {
     setSql("");
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/generate-sql", {
+      const res = await fetch(`${API.BASE_URL}/generate-sql`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,21 +32,21 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🧠 AI SQL Query Generator</h1>
+      <h1>🧠 AI Image Generator</h1>
 
       <textarea
-        placeholder="Enter your request (e.g., Get all users joined last month)"
+        placeholder="Enter your request (e.g., Generate image of nature)"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
 
       <button onClick={generateSQL}>
-        {loading ? "Generating..." : "Generate SQL"}
+        {loading ? "Generating..." : "Generate Image"}
       </button>
 
       {sql && (
         <div className="result">
-          <h3>Generated SQL:</h3>
+          <h3>Generated Image:</h3>
           <pre>{sql}</pre>
         </div>
       )}

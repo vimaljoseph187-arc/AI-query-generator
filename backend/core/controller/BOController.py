@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 import os
 from openai import OpenAI, RateLimitError
-from prompt import get_sql_prompt
+from core.controller.prompt import get_sql_prompt
+from core.model.BOModel import BOModel
 from flask_cors import CORS
 import requests
 import sounddevice as sd
@@ -15,6 +16,10 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+app = Blueprint('BO', __name__)
+
+
+
 # Import from your local file
 try:
     from image_generator import text_to_image, text_to_image_base64, get_generator
@@ -25,16 +30,10 @@ except ImportError as e:
     print(f"Files in directory: {os.listdir('.')}")
     sys.exit(1)
 
-
-# import mysql.connector
-# from mysql.connector import Error
-# import json
-
-app = Flask(__name__)
-
 CORS(app, origins=["http://localhost:5173"])
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
+
 
 def generate_sql_local(prompt):
     payload = {
@@ -56,7 +55,7 @@ def generate_sql_local(prompt):
 
 
 
-@app.route("/generate-sql", methods=["POST"])
+# @app.route("/generate-sql", methods=["POST"])
 def generate_sql():
     try:
         data = request.json
@@ -74,7 +73,7 @@ def generate_sql():
         print("Error:", e)
         return jsonify({"error": "Failed to generate SQL"}), 500
 
-# @app.route("/generate-sql", methods=["POST"])
+@app.route("/generate-sql", methods=["POST"])
 def generate_image():
     """Generate image from text prompt"""
     try:
@@ -106,5 +105,18 @@ def generate_image():
             "error": str(e)
         }), 500
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+@app.route('api/get/all_users',methods=['POST','GET'])
+def GetAllUsers():
+    try:
+        get_users=BOModel().GetAllUser()
+        # print(get_users)
+        if get_users:
+            return jsonify({
+                "success": True,
+                "data": get_users
+            }), 200
+        else:
+            return jsonify({"success":False,"error":"No data"}),500
+    except Exception as e:
+        return jsonify({"success":False,"error":str(e)}),500 
