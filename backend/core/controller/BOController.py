@@ -55,7 +55,7 @@ def generate_sql_local(prompt):
 
 
 
-# @app.route("/generate-sql", methods=["POST"])
+@app.route("/generate-sql", methods=["POST"])
 def generate_sql():
     try:
         data = request.json
@@ -73,7 +73,7 @@ def generate_sql():
         print("Error:", e)
         return jsonify({"error": "Failed to generate SQL"}), 500
 
-@app.route("/generate-sql", methods=["POST"])
+# @app.route("/generate-sql", methods=["POST"])
 def generate_image():
     """Generate image from text prompt"""
     try:
