@@ -32,21 +32,21 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🧠 AI Image Generator</h1>
+      <h1>🧠 AI Query Generator</h1>
 
       <textarea
-        placeholder="Enter your request (e.g., Generate image of nature)"
+        placeholder="Enter your request (e.g., get all users)"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
 
       <button onClick={generateSQL}>
-        {loading ? "Generating..." : "Generate Image"}
+        {loading ? "Generating..." : "Generate Query"}
       </button>
 
       {sql && (
         <div className="result">
-          <h3>Generated Image:</h3>
+          <h3>Generated Query:</h3>
           <pre>{sql}</pre>
         </div>
       )}
